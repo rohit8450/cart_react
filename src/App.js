@@ -12,7 +12,7 @@ class App extends React.Component {
               price: 99,
               title: 'Watch',
               qty: 1,
-              img: '',
+              img: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2F0Y2h8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
               id: 1
           },
 
@@ -20,14 +20,14 @@ class App extends React.Component {
               price: 999,
               title: 'Mobile Phone',
               qty: 10,
-              img: '',
+              img: 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
               id: 2
           },
           {
               price: 9999,
               title: 'Laptop',
               qty: 4,
-              img: '',
+              img: 'https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bGFwdG9wfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
               id: 3
           }
       
@@ -53,7 +53,7 @@ class App extends React.Component {
       const { products } = this.state;
       const index = products.indexOf(product);
 
-      if (  products[index].qty == 0){
+      if (  products[index].qty === 0){
           return;
       }
 
@@ -65,7 +65,7 @@ class App extends React.Component {
   }
   handleDeleteProduct = (id) => {
       const { products } = this.state;
-      const items = products.filter((item) => item.id != id); //  [{}]
+      const items = products.filter((item) => item.id !== id); //  [{}]
       this.setState({
           products: items
       })
@@ -80,6 +80,17 @@ class App extends React.Component {
     })
     return count;
   }
+
+  getCartTotal = () => {
+   const { products } = this.state;
+
+   let cartTotal = 0;
+
+   products.map((product) => {
+    cartTotal = cartTotal + product.qty * product.price
+   })
+   return cartTotal;
+  }
   render () {
     const { products } = this.state;
   return (
@@ -91,6 +102,7 @@ class App extends React.Component {
         onDecreaseQuantity={this.handleDecreaseQuantity}
         onDeleteProduct={this.handleDeleteProduct} 
         />
+        <div style={  {padding: 10, fontSize:20}}>TOTAL: {this.getCartCount()}</div>
     </div>
   );
 }
