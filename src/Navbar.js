@@ -9,7 +9,7 @@ class NavBar extends React.Component {
             <div style= {styles.nav}>
                 <div style= {styles.cartIconConatiner}>
                <img style={styles.cartIcon} src="https://cdn-icons-png.flaticon.com/128/4290/4290854.png" alt="cart-icon" />
-               <span style= {styles.cartCount}>3</span>
+               <span style= {styles.cartCount}> {this.props.count} </span>
                     
 
                     </div>
